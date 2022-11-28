@@ -7,29 +7,34 @@
 #include <map>
 #include <vector>
 
-#define kInvalid_Comp 00000
-
-//Controller and holder for all components and their entities
-class ComponentSystem
+namespace BA_Engine
 {
-	/// <summary>
-	/// Pair's components to entities
-	/// </summary>
-	std::map<EntityId, std::vector<IComponent>> EntitesComponentTree;
 
-public:
+	#define kInvalid_Comp 00000
 
-	/// <summary>
-	/// Create a new instance of a Component 
-	/// </summary>
-	/// <param name="entId">Parent Entity</param>
-	static void addComponent(EntityId entId);
+	//Controller and holder for all components and their entities
+	class ComponentSystem
+	{
+		/// <summary>
+		/// Pair's components to entities
+		/// </summary>
+		std::map<EntityId, std::vector<IComponent>> EntitesComponentTree;
 
-	/// <summary>
-	/// Shutdown an instance of a Component
-	/// </summary>
-	/// <param name="entId">Parent Entity</param>
-	static void removeComponent(EntityId entId);
-};
+	public:
+
+		/// <summary>
+		/// Create a new instance of a Component 
+		/// </summary>
+		/// <param name="entId">Parent Entity</param>
+		static void addComponent(EntityId entId);
+
+		/// <summary>
+		/// Shutdown an instance of a Component
+		/// </summary>
+		/// <param name="entId">Parent Entity</param>
+		static void removeComponent(EntityId entId);
+	};
+
+}
 
 #endif //ComponentSystem

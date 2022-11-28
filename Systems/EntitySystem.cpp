@@ -1,7 +1,12 @@
 #include "EntitySystem.h"
 
-EntityId EntitySystem::createEntity()
+namespace BA_Engine
 {
-    //KISS for now. just hold one number, send it's current value out, then increment the number
-    return currentId++;
+
+    EntityId EntitySystem::createEntity()
+    {
+        //KISS for now. just hold one number, send it's current value out, then increment the number
+        return currentId++;
+    }
+
 }

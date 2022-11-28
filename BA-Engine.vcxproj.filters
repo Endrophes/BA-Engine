@@ -32,5 +32,8 @@
     <ClInclude Include="Systems\ComponentSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BaseClass\IComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
