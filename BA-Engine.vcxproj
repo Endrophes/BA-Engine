@@ -147,6 +147,7 @@
     <ClInclude Include="BaseClass\IComponent.h" />
     <ClInclude Include="Systems\ComponentSystem.h" />
     <ClInclude Include="Systems\EntitySystem.h" />
+    <ClInclude Include="Utilities\RandomGenerator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
