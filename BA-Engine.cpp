@@ -21,6 +21,10 @@ int main()
 			std::cout << "Program terminated by user." << std::endl;
 			run = false;
 		}
+		else if (userinput == "Help")
+		{
+			//List out commands
+		}
 		else
 		{
 			std::cout << "unknown command" << std::endl;
