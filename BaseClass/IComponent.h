@@ -7,6 +7,8 @@ namespace BA_Engine
 	//Define
 	class IComponent
 	{
+
+
 	public:
 
 		/// <summary>

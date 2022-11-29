@@ -1,16 +1,17 @@
 
-#ifndef ComponentSystem
-#define ComponentSystem
+#ifndef COMPONENT_SYSTEM_H
+#define COMPONENT_SYSTEM_H
+
+#include <map>
+#include <vector>
 
 #include "EntitySystem.h"
 #include "../BaseClass/IComponent.h"
-#include <map>
-#include <vector>
 
 namespace BA_Engine
 {
 
-	#define kInvalid_Comp 00000
+	#define kInvalid_Comp 0;
 
 	//Controller and holder for all components and their entities
 	class ComponentSystem
@@ -37,4 +38,4 @@ namespace BA_Engine
 
 }
 
-#endif //ComponentSystem
+#endif //COMPONENT_SYSTEM_H
