@@ -1,10 +1,12 @@
 #ifndef ENTITY_SYSTEM_H
 #define ENTITY_SYSTEM_H
 
+#include "../Utilities/RandomGenerator.h"
+
 namespace BA_Engine
 {
 
-	#define kInvlaid_Entity 00000
+	#define kInvlaid_Entity 0;
 
 	// Every entity is just a unsigned __int32
 	/*
@@ -14,16 +16,11 @@ namespace BA_Engine
 			- This allows us to track 4,294,967,295 unique entities. (Your mad if you let it get that high)
 	*/
 
-	typedef unsigned __int32 EntityId;
+	typedef BA_Engine::uint64_t EntityId;
 
 	//Controller for Entity Id's
 	class EntitySystem
 	{
-
-	private:
-
-
-		EntityId currentId;
 
 	public:
 
