@@ -8,12 +8,12 @@ namespace BA_Engine
 
 	#define kInvlaid_Entity 0;
 
-	// Every entity is just a unsigned __int32
+	// Every entity is just a unsigned __int64
 	/*
 		why:
 			- No entity will have an id of negative or zero
 			- Every entity is a "collection" of components
-			- This allows us to track 4,294,967,295 unique entities. (Your mad if you let it get that high)
+			- This allows us to track a lot of unique entities. (Your mad if you let it get into the 1000)
 	*/
 
 	typedef BA_Engine::uint64_t EntityId;
