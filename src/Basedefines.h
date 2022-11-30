@@ -7,26 +7,39 @@
 
 namespace BA_Engine
 {
-	/// I don't need all of cstdint. (Yet)
-	
-	typedef unsigned __int8  uint8_t;
-	typedef unsigned __int64 uint64_t;
+	/// <summary>
+	/// Used to identify unique Components
+	/// </summary>
+	typedef std::uint64_t ComponentId;
 
-	typedef uint64_t ComponentId;
-	typedef uint64_t EntityId;
-	// Every entity is just a unsigned __int64
-	/*
-		why:
-			- No entity will have an id of negative or zero
-			- Every entity is just a "collection" of components
-				- Don't let the Entity Class fool you.
-			- This allows us to track a lot of unique entities. (Your mad if you let it get into the 1000)
-	*/
+	/// <summary>
+	/// Every entity is just a unsigned __int64
+	/// why:
+	/// 	- No entity will have an id of negative or zero
+	/// 	- Every entity is just a "collection" of components
+	/// 		- Don't let the Entity Class fool you.
+	/// 	- This allows us to track a lot of unique entities. (Your mad if you let it get into the 1000)
+	/// </summary>
+	typedef std::uint64_t EntityId;
 
+	/// <summary>
+	/// 
+	/// </summary>
+	typedef std::uint8_t SystemId;
+
+	/// <summary>
+	/// Component Data
+	/// </summary>
+	typedef unsigned char* CompData;
+
+	/// <summary>
 	// A Entity will never have an id of zero
+	/// </summary>
 	#define kInvlaid_Entity 0;
 	
-	// A 
+	/// <summary>
+	// 
+	/// </summary>
 	#define kInvlaid_Component 0;
 }
 
