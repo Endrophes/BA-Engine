@@ -88,6 +88,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,15 +141,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BA-Engine.cpp" />
-    <ClCompile Include="Systems\ComponentSystem.cpp" />
-    <ClCompile Include="Systems\EntitySystem.cpp" />
+    <ClCompile Include="src\BA-Engine.cpp" />
+    <ClCompile Include="src\BaseClass\Scene.cpp" />
+    <ClCompile Include="src\PrecompiledHeader.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\Systems\ComponentSystem.cpp" />
+    <ClCompile Include="src\Systems\EntitySystem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseClass\IComponent.h" />
-    <ClInclude Include="Systems\ComponentSystem.h" />
-    <ClInclude Include="Systems\EntitySystem.h" />
-    <ClInclude Include="Utilities\RandomGenerator.h" />
+    <ClInclude Include="src\BaseClass\IComponent.h" />
+    <ClInclude Include="src\BaseClass\Scene.h" />
+    <ClInclude Include="src\Basedefines.h" />
+    <ClInclude Include="src\PrecompiledHeader.h" />
+    <ClInclude Include="src\Systems\ComponentSystem.h" />
+    <ClInclude Include="src\Systems\EntitySystem.h" />
+    <ClInclude Include="src\Utilities\RandomGenerator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
