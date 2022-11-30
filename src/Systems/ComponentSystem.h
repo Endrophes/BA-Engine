@@ -2,10 +2,7 @@
 #ifndef COMPONENT_SYSTEM_H
 #define COMPONENT_SYSTEM_H
 
-#include <map>
-#include <vector>
-
-#include "EntitySystem.h"
+#include "../PrecompiledHeader.h"
 #include "../BaseClass/IComponent.h"
 
 namespace BA_Engine
