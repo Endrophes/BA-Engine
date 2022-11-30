@@ -3,13 +3,13 @@
 
 #include <random>
 
+#include "../Basedefines.h"
+
 namespace BA_Engine
 {
 
-	typedef unsigned __int64 uint64_t;
-
 	/// <summary>
-	/// Use for random number generation for the UUID
+	/// Use for random number generation for the UUID_V1
 	/// </summary>
 	static std::random_device s_RandomDevice;
 	static std::mt19937_64 s_Engine(s_RandomDevice());
