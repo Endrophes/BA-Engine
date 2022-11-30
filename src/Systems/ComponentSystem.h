@@ -11,8 +11,6 @@
 namespace BA_Engine
 {
 
-	#define kInvalid_Comp 0;
-
 	//Controller and holder for all components and their entities
 	class ComponentSystem
 	{
