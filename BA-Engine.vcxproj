@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\BA-Engine.cpp" />
+    <ClCompile Include="src\BaseClass\Entity.cpp" />
     <ClCompile Include="src\BaseClass\Scene.cpp" />
     <ClCompile Include="src\PrecompiledHeader.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -150,7 +151,10 @@
     <ClCompile Include="src\Systems\Registry.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\BaseClass\Archetype.h" />
+    <ClInclude Include="src\BaseClass\Entity.h" />
     <ClInclude Include="src\BaseClass\IComponent.h" />
+    <ClInclude Include="src\BaseClass\ISystem.h" />
     <ClInclude Include="src\BaseClass\Scene.h" />
     <ClInclude Include="src\Basedefines.h" />
     <ClInclude Include="src\PrecompiledHeader.h" />
