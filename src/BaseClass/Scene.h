@@ -1,17 +1,17 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+#include "../PrecompiledHeader.h"
 #include "IComponent.h"
-#include "../Systems/EntitySystem.h"
+#include "../Utilities/RandomGenerator.h"
 
-#include <map>
-#include <vector>
+#include <unordered_set>
 
 namespace BA_Engine
 {
 
 	/// <summary>
-	/// Stores a collections of entities for a world.
+	/// Stores a collections of entities for a world and ties Entities to it's components
 	/// </summary>
 	class Scene
 	{
@@ -19,8 +19,27 @@ namespace BA_Engine
 		/// <summary>
 		/// Pair's components to entities
 		/// </summary>
-		std::map<EntityId, std::vector<IComponent>> EntitesComponentTree;
+		std::map<EntityId, std::unordered_set<IComponent*>> EntitesComponentTree;
 
+
+		/// <summary>
+		/// Added a new entity to the map
+		/// </summary>
+		/// <returns>The Id of the new entity</returns>
+		EntityId addEntity(EntityId entId = RandomGenerator::generateUUID_V1());
+
+		/// <summary>
+		/// Goes through a shutdown procedure and removes the Entity from the Scene
+		/// </summary>
+		/// <param name="entId">The Entity you want to remove</param>
+		/// <returns>Boolean value on if it passed or failed</returns>
+		bool removeEntity(EntityId entId);
+
+
+		/// <summary>
+		/// Iterate over the Scene and update the entities via their Components
+		/// </summary>
+		void onUpdate();
 	};
 
 }
