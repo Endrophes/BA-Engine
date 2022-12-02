@@ -7,16 +7,14 @@
 namespace BA_Engine
 {
     /// <summary>
-    /// A Unique number
-    /// </summary>
-    typedef uint64_t ArchetypeId;
-
-    /// <summary>
     /// Collections of Components and Entities
     /// </summary>
     struct Archetype
     {
-        ArchetypeId mType;
+        /// <summary>
+        /// 
+        /// </summary>
+        std::vector<ComponentId> mType;
 
         /// <summary>
         /// 
