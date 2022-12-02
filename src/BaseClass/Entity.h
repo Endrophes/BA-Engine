@@ -29,15 +29,17 @@ namespace BA_Engine
 		/// <summary>
 		/// 
 		/// </summary>
+		template<typename T>
 		void addComponent();
 
 
-		template<typename t>
+		template<typename T>
 		bool hasComponent();
 
 		/// <summary>
 		/// 
 		/// </summary>
+		template<typename T>
 		void removeComponent();
 
 	private:
