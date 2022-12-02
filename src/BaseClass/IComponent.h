@@ -6,30 +6,41 @@
 namespace BA_Engine
 {
 
-	//Define
+	/// <summary>
+	/// 
+	/// </summary>
 	class IComponent
 	{
 
 
 	public:
 
+		virtual ~IComponent() {}
+
 		/// <summary>
 		/// Grab or initialize parts of the component before start up
 		/// </summary>
-		/// <param name="entId">Id of the parent entity</param>
-		virtual void setup(EntityId entId) = 0;
+		virtual void setup(CompData data) const = 0;
 
 		/// <summary>
 		/// Ran every frame to make changes to logic
 		/// </summary>
-		/// <param name="entId">Id of the parent entity</param>
-		virtual void update(EntityId entId) = 0;
+		virtual void update(CompData data) const = 0;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		virtual void moveData(CompData source, CompData destination) const = 0;
 
 		/// <summary>
 		/// Close out and clear data when removing the component
 		/// </summary>
-		/// <param name="entId">Id of the parent entity</param>
-		virtual void shutdown(EntityId entId) = 0;
+		virtual void shutdown(CompData data) const = 0;
+
+		/// <summary>
+		/// Get the size of data for the given component
+		/// </summary>
+		virtual std::size_t getSize() const = 0;
 	};
 
 }
