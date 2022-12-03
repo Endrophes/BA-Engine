@@ -14,19 +14,19 @@ namespace BA_Engine
 
 	}
 
-	template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
+	template<class T>
 	void Entity::addComponent()
 	{
 
 	}
 
-	template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
+	template<class T>
 	bool Entity::hasComponent()
 	{
 		return false;
 	}
 
-	template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
+	template<class T>
 	void Entity::removeComponent()
 	{
 

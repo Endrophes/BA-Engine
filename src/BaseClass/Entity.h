@@ -26,16 +26,16 @@ namespace BA_Engine
 		/// <summary>
 		/// 
 		/// </summary>
-		template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
+		template<class T>
 		void addComponent();
 
-		template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
+		template<class T>
 		bool hasComponent();
 
 		/// <summary>
 		/// 
 		/// </summary>
-		template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
+		template<class T>
 		void removeComponent();
 
 	private:

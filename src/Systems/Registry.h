@@ -46,38 +46,38 @@ namespace BA_Engine
         /// <summary>
         /// 
         /// </summary>
-        template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
+        template<class T>
         void registerComponent();
 
         /// <summary>
         /// 
         /// </summary>
-        template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
+        template<class T>
         bool isComponentRegistered();
 
         /// <summary>
         /// 
         /// </summary>
-        template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
+        template<class T>
         void addComponent(const EntityId& pEntid);
         
         /// <summary>
         /// 
         /// </summary>
-        template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
+        template<class T>
         T* hasComponent(const EntityId& pEntId);
 
         /// <summary>
         /// 
         /// </summary>
-        template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
+        template<class T>
         T* getComponent(const EntityId& pEntId);
 
 
         /// <summary>
         /// 
         /// </summary>
-        template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
+        template<class T>
         void removeComponent();
 
         /// <summary>
