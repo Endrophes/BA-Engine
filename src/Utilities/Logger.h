@@ -53,7 +53,7 @@ namespace BA_Engine
         }
 
     private:
-        LogLevel minThresh = Debug;
+        LogLevel minThresh = LogLevel::Debug;
 
     };
 
