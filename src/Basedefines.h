@@ -23,7 +23,7 @@ namespace BA_Engine
 	typedef std::uint64_t EntityId;
 
 	/// <summary>
-	/// 
+	/// Simple id for a given layer the system is on
 	/// </summary>
 	typedef std::uint8_t SystemLayer;
 

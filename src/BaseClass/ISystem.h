@@ -16,6 +16,9 @@ namespace BA_Engine
 
         virtual ~ISystem() {}
 
+        /// <summary>
+        /// Perform operations for the given system
+        /// </summary>
         virtual void run(const float elapsedTime) = 0;
 
     };

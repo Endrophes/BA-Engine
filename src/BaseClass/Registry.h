@@ -31,7 +31,7 @@ namespace BA_Engine
         //## Entities ##
 
         /// <summary>
-        /// Creates and registors an Entity Id
+        /// Creates and registers an Entity Id
         /// </summary>
         const EntityId createEntity();
 

@@ -7,7 +7,8 @@ namespace BA_Engine
 {
 
 	/// <summary>
-	/// 
+	/// A simple class that holds only data values
+	/// this is used to help the Registry store the components
 	/// </summary>
 	class IComponent
 	{
