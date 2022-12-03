@@ -65,7 +65,7 @@
     <ClInclude Include="src\BaseClass\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\BaseClass\Archetype.h">
+    <ClInclude Include="src\Utilities\Logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

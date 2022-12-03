@@ -151,7 +151,6 @@
     <ClCompile Include="src\Systems\Registry.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\BaseClass\Archetype.h" />
     <ClInclude Include="src\BaseClass\Entity.h" />
     <ClInclude Include="src\BaseClass\IComponent.h" />
     <ClInclude Include="src\BaseClass\ISystem.h" />
@@ -161,6 +160,7 @@
     <ClInclude Include="src\Systems\ComponentSystem.h" />
     <ClInclude Include="src\Systems\EntitySystem.h" />
     <ClInclude Include="src\Systems\Registry.h" />
+    <ClInclude Include="src\Utilities\Logger.h" />
     <ClInclude Include="src\Utilities\RandomGenerator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
