@@ -33,7 +33,7 @@ namespace BA_Engine
         /// <summary>
         /// 
         /// </summary>
-        void registerEntity(const EntityId pEntId);
+        const EntityId createEntity();
 
         /// <summary>
         /// With a given EntityId, go through all it's components and shutdown/clean-up
@@ -73,7 +73,6 @@ namespace BA_Engine
         template<class T>
         T* getComponent(const EntityId& pEntId);
 
-
         /// <summary>
         /// 
         /// </summary>
@@ -91,19 +90,37 @@ namespace BA_Engine
         /// <summary>
         /// 
         /// </summary>
-        void registerSystem(const std::uint8_t& pLayer, ISystem* pSys);
+        void registerSystem(const SystemId& pLayer, ISystem* pSys);
     
         /// <summary>
         /// 
         /// </summary>
-        void runSystems(const std::uint8_t& pLayer, const float pElapsedTime);
+        void runSystems(const SystemId& pLayer, const float pElapsedTime);
 
     private:
 
         /// <summary>
-        /// 
+        /// A map that set's up the components ID and matches it to the components name
         /// </summary>
-        std::unordered_map < const char* , IComponent* > mComponentIdMap;
+        std::unordered_map< unsigned char *, ComponentId > mComponentRegMap;
+
+        /// <summary>
+        /// A map that ties the Entity Id to its components
+        /// </summary>
+        std::unordered_map<
+            EntityId,
+            std::unordered_map< ComponentId, IComponent >
+        > mEntityCompMap;
+
+        /// <summary>
+        /// Holds each instance of a component by it's ID
+        /// </summary>
+        std::unordered_map< ComponentId, std::vector<EntityId> > mComponentStorageMap;
+
+        /// <summary>
+        /// Holds all systems and keyed by their Id
+        /// </summary>
+        std::unordered_map< SystemId, ISystem* > mSystemRegMap;
 
     };
 
