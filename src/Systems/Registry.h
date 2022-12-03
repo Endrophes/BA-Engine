@@ -128,7 +128,7 @@ namespace BA_Engine
         /// <summary>
         /// Holds all systems and keyed by their Id
         /// </summary>
-        std::unordered_map< SystemLayer, ISystem* > mSystemRegMap;
+        std::unordered_map< SystemLayer, std::vector<ISystem*> > mSystemRegMap;
 
     };
 
