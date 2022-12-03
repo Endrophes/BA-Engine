@@ -15,20 +15,6 @@ namespace BA_Engine
 
 		virtual ~IComponent() {}
 
-		/// <summary>
-		/// Grab or initialize parts of the component before start up
-		/// </summary>
-		//virtual void setup() const = 0;
-
-		/// <summary>
-		/// Ran every frame to make changes to logic
-		/// </summary>
-		//virtual void update() const = 0;
-
-		/// <summary>
-		/// Close out and clear data when removing the component
-		/// </summary>
-		//virtual void shutdown() const = 0;
 	};
 
 }
