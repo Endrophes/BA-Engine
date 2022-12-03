@@ -3,6 +3,7 @@
 
 #include "../Utilities/RandomGenerator.h"
 #include "../Basedefines.h"
+#include "Registry.h"
 #include "Scene.h"
 
 namespace BA_Engine
@@ -18,22 +19,24 @@ namespace BA_Engine
 		~Entity();
 	
 		/// <summary>
-		/// 
+		/// Return the Entities ID number
 		/// </summary>
-		/// <returns>The id of the given entity</returns>
 		EntityId getId();
 
 		/// <summary>
-		/// 
+		/// Added a component to the entity via the scene
 		/// </summary>
 		template<class T>
 		void addComponent();
 
+		/// <summary>
+		/// Checks to see if the component has been added to the entity
+		/// </summary>
 		template<class T>
 		bool hasComponent();
 
 		/// <summary>
-		/// 
+		/// Removes a component from the entity
 		/// </summary>
 		template<class T>
 		void removeComponent();
@@ -46,7 +49,7 @@ namespace BA_Engine
 		EntityId mEntId;
 		
 		/// <summary>
-		/// 
+		/// Manages and controls all the entity's, scenes, and systems
 		/// </summary>
 		Scene* mScene;
 	};
