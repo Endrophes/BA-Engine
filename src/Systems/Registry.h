@@ -5,7 +5,6 @@
 #include "../Basedefines.h"
 #include "../BaseClass/IComponent.h"
 #include "../BaseClass/ISystem.h"
-#include "../BaseClass/Archetype.h"
 
 namespace BA_Engine
 {
@@ -25,18 +24,7 @@ namespace BA_Engine
         */
     private:
 
-        struct Record
-        {
-            /// <summary>
-            /// 
-            /// </summary>
-            Archetype* arch = nullptr;
 
-            /// <summary>
-            /// 
-            /// </summary>
-            std::size_t index = 0;
-        };
 
     public:
 
@@ -58,38 +46,38 @@ namespace BA_Engine
         /// <summary>
         /// 
         /// </summary>
-        template<class T>
+        template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
         void registerComponent();
 
         /// <summary>
         /// 
         /// </summary>
-        template<class T>
-        T* isComponentRegistered();
+        template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
+        bool isComponentRegistered();
 
         /// <summary>
         /// 
         /// </summary>
-        template<class T>
-        void addComponent();
+        template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
+        void addComponent(const EntityId& pEntid);
         
         /// <summary>
         /// 
         /// </summary>
-        template<class T>
+        template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
         T* hasComponent(const EntityId& pEntId);
 
         /// <summary>
         /// 
         /// </summary>
-        template<class T>
+        template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
         T* getComponent(const EntityId& pEntId);
 
 
         /// <summary>
         /// 
         /// </summary>
-        template<class T>
+        template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
         void removeComponent();
 
         /// <summary>
@@ -110,31 +98,13 @@ namespace BA_Engine
         /// </summary>
         void runSystems(const std::uint8_t& pLayer, const float pElapsedTime);
 
-        //## Other ##
-
-        Archetype* getArchetype(const ArchetypeId& pArcId);
-
     private:
 
         /// <summary>
         /// 
         /// </summary>
-        std::unordered_map < ComponentId, IComponent* > mComponentIdMap;
+        std::unordered_map < const char* , IComponent* > mComponentIdMap;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        std::unordered_map < EntityId, Record > mEntityArchetypeMap;
-
-        /// <summary>
-        /// Holds all Archetype's
-        /// </summary>
-        std::vector< Archetype > mArchetypeStorage;
-
-        /// <summary>
-        /// Ties Entities (By Id) to a given record
-        /// </summary>
-        std::unordered_map < EntityId, Record > mEntityArchetypeMap;
     };
 
 }
