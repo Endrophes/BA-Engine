@@ -31,7 +31,7 @@ namespace BA_Engine
         //## Entities ##
 
         /// <summary>
-        /// 
+        /// Creates and registors an Entity Id
         /// </summary>
         const EntityId createEntity();
 
@@ -44,51 +44,58 @@ namespace BA_Engine
         //## Components ##
 
         /// <summary>
-        /// 
+        /// Used when you first want to use the component as we need to track it by a key value
+        /// other than it's string name
         /// </summary>
         template<class T>
         void registerComponent();
 
         /// <summary>
-        /// 
+        /// Returned the ID for the given registered component
         /// </summary>
         template<class T>
         ComponentId getComponentId();
 
         /// <summary>
-        /// 
+        /// Confirms that the component has a ID associated with it.
         /// </summary>
         template<class T>
         bool isComponentRegistered();
 
+        /// <summary>
+        /// Confirms that the component has a ID associated with it.
+        /// Internal function that is used to reduce redundancy
+        /// </summary>
         bool isComponentRegistered(unsigned char* pCompName);
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the given component and pass in
+        /// the arguments
         /// </summary>
         template<class T, typename... Args>
         T* addComponent(const EntityId& pEntid, Args&&... args);
         
         /// <summary>
-        /// 
+        /// Confirms that the component has been attached to the
+        /// the given Entity
         /// </summary>
         template<class T>
         bool hasComponent(const EntityId& pEntId);
 
         /// <summary>
-        /// 
+        /// Gets an instance of a component that is attached to the Entity
         /// </summary>
         template<class T>
         T* getComponent(const EntityId& pEntId);
 
         /// <summary>
-        /// 
+        /// Removes an instance of the component that is attached to the Entity
         /// </summary>
         template<class T>
         void removeComponent(const EntityId& pEntId);
 
         /// <summary>
-        /// 
+        /// Gets a vector of entities that have a specific component
         /// </summary>
         template<class T>
         std::vector<EntityId> getEntitiesWith();
@@ -96,12 +103,12 @@ namespace BA_Engine
         //## Systems ##
 
         /// <summary>
-        /// 
+        /// Adds a given system to a specific layer
         /// </summary>
         void registerSystem(const SystemLayer& pLayer, ISystem* pSys);
     
         /// <summary>
-        /// 
+        /// Runs all systems on a given layer
         /// </summary>
         void runSystems(const SystemLayer& pLayer, const float pElapsedTime);
 
