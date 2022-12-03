@@ -148,7 +148,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Systems\ComponentSystem.cpp" />
-    <ClCompile Include="src\Systems\Registry.cpp" />
+    <ClCompile Include="src\BaseClass\Registry.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BaseClass\Entity.h" />
@@ -159,7 +159,7 @@
     <ClInclude Include="src\PrecompiledHeader.h" />
     <ClInclude Include="src\Systems\ComponentSystem.h" />
     <ClInclude Include="src\Systems\EntitySystem.h" />
-    <ClInclude Include="src\Systems\Registry.h" />
+    <ClInclude Include="src\BaseClass\Registry.h" />
     <ClInclude Include="src\Utilities\Logger.h" />
     <ClInclude Include="src\Utilities\RandomGenerator.h" />
   </ItemGroup>

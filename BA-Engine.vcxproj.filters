@@ -27,7 +27,7 @@
     <ClCompile Include="src\PrecompiledHeader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Systems\Registry.cpp">
+    <ClCompile Include="src\BaseClass\Registry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\BaseClass\Entity.cpp">
@@ -56,7 +56,7 @@
     <ClInclude Include="src\Basedefines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Systems\Registry.h">
+    <ClInclude Include="src\BaseClass\Registry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\BaseClass\ISystem.h">
