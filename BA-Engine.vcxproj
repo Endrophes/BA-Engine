@@ -147,7 +147,6 @@
     <ClCompile Include="src\PrecompiledHeader.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Systems\ComponentSystem.cpp" />
     <ClCompile Include="src\BaseClass\Registry.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,7 +156,6 @@
     <ClInclude Include="src\BaseClass\Scene.h" />
     <ClInclude Include="src\Basedefines.h" />
     <ClInclude Include="src\PrecompiledHeader.h" />
-    <ClInclude Include="src\Systems\ComponentSystem.h" />
     <ClInclude Include="src\Systems\EntitySystem.h" />
     <ClInclude Include="src\BaseClass\Registry.h" />
     <ClInclude Include="src\Utilities\Logger.h" />
