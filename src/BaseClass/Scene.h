@@ -4,11 +4,14 @@
 #include "../PrecompiledHeader.h"
 #include "IComponent.h"
 #include "../Utilities/RandomGenerator.h"
+#include "Registry.h"
 
 #include <unordered_set>
 
 namespace BA_Engine
 {
+
+	class Entity; // Forward declaration
 
 	/// <summary>
 	/// Stores a collections of entities for a world and ties Entities to it's components
@@ -16,30 +19,38 @@ namespace BA_Engine
 	class Scene
 	{
 
+	private:
+
 		/// <summary>
 		/// Pair's components to entities
 		/// </summary>
-		std::map<EntityId, std::unordered_set<IComponent*>> EntitesComponentTree;
+		Registry mRegistor;
 
+		friend class Entity;
+
+	public:
+		Scene();
+		~Scene();
 
 		/// <summary>
 		/// Added a new entity to the map
 		/// </summary>
-		/// <returns>The Id of the new entity</returns>
-		EntityId addEntity(EntityId entId = RandomGenerator::generateUUID_V1());
+		Entity createEntity();
 
 		/// <summary>
 		/// Goes through a shutdown procedure and removes the Entity from the Scene
 		/// </summary>
-		/// <param name="entId">The Entity you want to remove</param>
-		/// <returns>Boolean value on if it passed or failed</returns>
-		bool removeEntity(EntityId entId);
-
+		void removeEntity(Entity pEnt);
 
 		/// <summary>
-		/// Iterate over the Scene and update the entities via their Components
+		/// 
 		/// </summary>
-		void onUpdate();
+		void addSystem(const SystemLayer& pLayer, ISystem* pSys);
+
+		/// <summary>
+		/// Iterate over the Systems and update the Scene
+		/// </summary>
+		void onUpdate(const SystemLayer& pLayerToRun, const float pElapsedTime);
 	};
 
 }
