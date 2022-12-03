@@ -2,7 +2,6 @@
 #define I_SYSTEM_H
 
 #include "../Basedefines.h"
-#include "Archetype.h"
 
 namespace BA_Engine
 {
