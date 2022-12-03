@@ -53,19 +53,27 @@ namespace BA_Engine
         /// 
         /// </summary>
         template<class T>
-        bool isComponentRegistered();
+        ComponentId getComponentId();
 
         /// <summary>
         /// 
         /// </summary>
         template<class T>
-        void addComponent(const EntityId& pEntid);
+        bool isComponentRegistered();
+
+        bool isComponentRegistered(unsigned char* pCompName);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        template<class T>
+        T* addComponent(const EntityId& pEntid);
         
         /// <summary>
         /// 
         /// </summary>
         template<class T>
-        T* hasComponent(const EntityId& pEntId);
+        bool hasComponent(const EntityId& pEntId);
 
         /// <summary>
         /// 
@@ -77,7 +85,7 @@ namespace BA_Engine
         /// 
         /// </summary>
         template<class T>
-        void removeComponent();
+        void removeComponent(const EntityId& pEntId);
 
         /// <summary>
         /// 
