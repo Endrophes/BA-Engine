@@ -66,8 +66,8 @@ namespace BA_Engine
         /// <summary>
         /// 
         /// </summary>
-        template<class T>
-        T* addComponent(const EntityId& pEntid);
+        template<class T, typename... Args>
+        T* addComponent(const EntityId& pEntid, Args&&... args);
         
         /// <summary>
         /// 

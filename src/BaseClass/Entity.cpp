@@ -21,10 +21,10 @@ namespace BA_Engine
 		return mEntId;
 	}
 
-	template<class T>
-	void Entity::addComponent()
+	template<class T, typename... Args>
+	void Entity::addComponent(Args&&... args)
 	{
-		mScene->mRegistor.addComponent<T>(mEntId);
+		mScene->mRegistor.addComponent<T>(mEntId, std::forward<Args>(args)...);
 	}
 
 	template<class T>

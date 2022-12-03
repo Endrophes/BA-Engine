@@ -26,8 +26,8 @@ namespace BA_Engine
 		/// <summary>
 		/// Added a component to the entity via the scene
 		/// </summary>
-		template<class T>
-		void addComponent();
+		template<class T, typename... Args>
+		void addComponent(Args&&... args);
 
 		/// <summary>
 		/// Checks to see if the component has been added to the entity

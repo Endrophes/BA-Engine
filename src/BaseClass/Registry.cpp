@@ -96,8 +96,8 @@ namespace BA_Engine
 		return (mComponentRegMap.find(pCompName) != mComponentRegMap.end());
 	}
 
-	template<class T>
-	T* Registry::addComponent(const EntityId& pEntId)
+	template<class T, typename... Args>
+	T* Registry::addComponent(const EntityId& pEntId, Args&&... args)
 	{
 		auto compName = typeid(T).name();
 
@@ -121,7 +121,7 @@ namespace BA_Engine
 
 		ComponentId& compId = mComponentRegMap[compName];
 
-		T* newComp = new T;
+		T* newComp = new T(args);
 
 		//Add the new component
 		mEntityCompMap[pEntId][compId] = newComp;
