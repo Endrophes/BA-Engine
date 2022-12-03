@@ -49,4 +49,161 @@ namespace BA_Engine
 		//Remove the Entity
 		mEntityCompMap.erase(pEntId);
 	}
+
+	template<class T>
+	void Registry::registerComponent()
+	{
+		auto compName = typeid(T).name();
+
+		if (isComponentRegistered<T>())
+		{
+			log_d("Component has already been registered")
+			return;
+		}
+
+		//TODO: Replace with counter
+		ComponentId newCompId = RandomGenerator::generateUUID_V1();
+
+		mComponentRegMap.emplace(
+			std::pair<
+				compName,
+				newCompId
+			>
+		);
+	}
+
+	template<class T>
+	ComponentId Registry::getComponentId()
+	{
+		auto compName = typeid(T).name();
+		if (!isComponentRegistered(compName))
+		{
+			return kInvlaid_Component;
+		}
+
+		return mComponentRegMap[compName];
+	}
+
+	template<class T>
+	bool Registry::isComponentRegistered()
+	{
+		auto compName = typeid(T).name();
+		return (mComponentRegMap.find(compName) != mComponentRegMap.end());
+	}
+
+	bool Registry::isComponentRegistered(unsigned char* pCompName)
+	{
+		return (mComponentRegMap.find(pCompName) != mComponentRegMap.end());
+	}
+
+	template<class T>
+	T* Registry::addComponent(const EntityId& pEntId)
+	{
+		auto compName = typeid(T).name();
+
+		if (!isComponentRegistered(compName))
+		{
+			log_d("Component has not been register")
+			return;
+		}
+
+		if (mEntityCompMap.find(pEntId) != mEntityCompMap.end())
+		{
+			log_d("Entity has not been register")
+			return;
+		}
+
+		if (hasComponent<T>(pEntId))
+		{
+			log_d("Entity already has the component")
+			return;
+		}
+
+		ComponentId& compId = mComponentRegMap[compName];
+
+		T* newComp = new T;
+
+		//Add the new component
+		mEntityCompMap[pEntId][compId] = newComp;
+
+		//Record who is now using the component
+		mComponentStorageMap[compId].push_back(pEntId);
+
+		return newComp;
+	}
+
+	template<class T>
+	bool Registry::hasComponent(const EntityId& pEntId)
+	{
+		ComponentId compId = getComponentId<T>();
+		
+		if (mEntityCompMap.find(pEntId) == mEntityCompMap.end())
+		{
+			log_d("Entity has not been register")
+			return false;
+		}
+
+		if (mEntityCompMap[pEntId].find(compId) != mEntityCompMap[pEntId].end())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
+	template<class T>
+	T* Registry::getComponent(const EntityId& pEntId)
+	{
+		ComponentId compId = getComponentId<T>();
+
+		if (mEntityCompMap.find(pEntId) == mEntityCompMap.end())
+		{
+			log_d("Entity has not been register")
+			return;
+		}
+
+		if (mEntityCompMap[pEntId].find(compId) != mEntityCompMap[pEntId].end())
+		{
+			return &mEntityCompMap[pEntId][compId];
+		}
+		else
+		{
+			return nullptr;
+		}
+	}
+
+	template<class T>
+	void Registry::removeComponent(const EntityId& pEntId)
+	{
+		auto compName = typeid(T).name();
+		ComponentId compId = getComponentId<T>();
+
+		if (!isComponentRegistered(compName))
+		{
+			log_d("Component has not been register")
+			return;
+		}
+
+		if (mEntityCompMap.find(pEntId) != mEntityCompMap.end())
+		{
+			log_d("Entity has not been register")
+			return;
+		}
+
+		if (!hasComponent<T>(pEntId))
+		{
+			log_d("Component was removed from the entity")
+			return;
+		}
+
+		// Remove entity from the list
+		mComponentStorageMap[compId].erase(pEntId);
+
+		// Remove the component from the Entity list
+		mEntityCompMap[pEntId].erase(compId);
+	}
+
 }
