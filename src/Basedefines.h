@@ -25,7 +25,7 @@ namespace BA_Engine
 	/// <summary>
 	/// 
 	/// </summary>
-	typedef std::uint8_t SystemId;
+	typedef std::uint8_t SystemLayer;
 
 	/// <summary>
 	/// Component Data

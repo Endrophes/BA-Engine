@@ -12,6 +12,8 @@ namespace BA_Engine
     class ISystem
     {
     
+    public:
+
         virtual ~ISystem() {}
 
         virtual void run(const float elapsedTime) = 0;

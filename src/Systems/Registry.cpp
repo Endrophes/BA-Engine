@@ -27,7 +27,7 @@ namespace BA_Engine
 	{
 		if (mEntityCompMap.find(pEntId) == mEntityCompMap.cend())
 		{
-			log_d("Entity was already removed or does not exist")
+			log_d("Entity was already removed or does not exist");
 			return;
 		}
 
@@ -57,7 +57,7 @@ namespace BA_Engine
 
 		if (isComponentRegistered<T>())
 		{
-			log_d("Component has already been registered")
+			log_d("Component has already been registered");
 			return;
 		}
 
@@ -103,19 +103,19 @@ namespace BA_Engine
 
 		if (!isComponentRegistered(compName))
 		{
-			log_d("Component has not been register")
+			log_d("Component has not been register");
 			return;
 		}
 
 		if (mEntityCompMap.find(pEntId) != mEntityCompMap.end())
 		{
-			log_d("Entity has not been register")
+			log_d("Entity has not been register");
 			return;
 		}
 
 		if (hasComponent<T>(pEntId))
 		{
-			log_d("Entity already has the component")
+			log_d("Entity already has the component");
 			return;
 		}
 
@@ -183,19 +183,19 @@ namespace BA_Engine
 
 		if (!isComponentRegistered(compName))
 		{
-			log_d("Component has not been register")
+			log_d("Component has not been register");
 			return;
 		}
 
 		if (mEntityCompMap.find(pEntId) != mEntityCompMap.end())
 		{
-			log_d("Entity has not been register")
+			log_d("Entity has not been register");
 			return;
 		}
 
 		if (!hasComponent<T>(pEntId))
 		{
-			log_d("Component was removed from the entity")
+			log_d("Component was removed from the entity");
 			return;
 		}
 
@@ -204,6 +204,55 @@ namespace BA_Engine
 
 		// Remove the component from the Entity list
 		mEntityCompMap[pEntId].erase(compId);
+	}
+
+	template<class T>
+	std::vector<EntityId> Registry::getEntitiesWith()
+	{
+		if (!isComponentRegistered<T>())
+		{
+			log_d("Component has not been register");
+			
+			std::vector<EntityId> entIds;
+			return entIds;
+		}
+
+		ComponentId compId = getComponentId<T>();
+
+		return mComponentStorageMap[compId];
+
+	}
+
+	void Registry::registerSystem(const SystemLayer& pLayer, ISystem* pSys)
+	{
+		if (mSystemRegMap.find(pLayer) == mSystemRegMap.end())
+		{
+			std::vector<ISystem*> sys;
+			sys.push_back(pSys);
+			mSystemRegMap.emplace(
+				std::pair<SystemLayer, std::vector<ISystem*>>(
+					pLayer,
+					sys
+				));
+		}
+		else
+		{
+			mSystemRegMap[pLayer].push_back(pSys);
+		}
+	}
+
+	void Registry::runSystems(const SystemLayer& pLayer, const float pElapsedTime)
+	{
+		if (mSystemRegMap.find(pLayer) != mSystemRegMap.end())
+		{
+			log_d("Layer has not been set");
+			return;
+		}
+
+		for (auto sys : mSystemRegMap[pLayer])
+		{
+			sys->run(pElapsedTime);
+		}
 	}
 
 }

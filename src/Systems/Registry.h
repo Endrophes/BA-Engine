@@ -90,7 +90,7 @@ namespace BA_Engine
         /// <summary>
         /// 
         /// </summary>
-        template<class... Ts>
+        template<class T>
         std::vector<EntityId> getEntitiesWith();
 
         //## Systems ##
@@ -98,12 +98,12 @@ namespace BA_Engine
         /// <summary>
         /// 
         /// </summary>
-        void registerSystem(const SystemId& pLayer, ISystem* pSys);
+        void registerSystem(const SystemLayer& pLayer, ISystem* pSys);
     
         /// <summary>
         /// 
         /// </summary>
-        void runSystems(const SystemId& pLayer, const float pElapsedTime);
+        void runSystems(const SystemLayer& pLayer, const float pElapsedTime);
 
     private:
 
@@ -128,7 +128,7 @@ namespace BA_Engine
         /// <summary>
         /// Holds all systems and keyed by their Id
         /// </summary>
-        std::unordered_map< SystemId, ISystem* > mSystemRegMap;
+        std::unordered_map< SystemLayer, ISystem* > mSystemRegMap;
 
     };
 
