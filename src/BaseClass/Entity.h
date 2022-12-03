@@ -5,9 +5,6 @@
 #include "../Basedefines.h"
 #include "Scene.h"
 
-#include <WeakReference.h>
-
-
 namespace BA_Engine
 {
 
@@ -29,17 +26,16 @@ namespace BA_Engine
 		/// <summary>
 		/// 
 		/// </summary>
-		template<typename T>
+		template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
 		void addComponent();
 
-
-		template<typename T>
+		template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
 		bool hasComponent();
 
 		/// <summary>
 		/// 
 		/// </summary>
-		template<typename T>
+		template<class T, std::enable_if<std::is_base_of<IComponent, T>::value>>
 		void removeComponent();
 
 	private:
