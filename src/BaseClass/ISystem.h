@@ -8,16 +8,14 @@ namespace BA_Engine
 {
 
     /// <summary>
-    /// Operates on a given Layer of Components
+    /// Operates on a given set of Components
     /// </summary>
     class ISystem
     {
-
+    
         virtual ~ISystem() {}
 
-        virtual ArchetypeId getArchId() const = 0;
-
-        virtual void run(const float elapsedTime, Archetype* arType) = 0;
+        virtual void run(const float elapsedTime) = 0;
 
     };
 
