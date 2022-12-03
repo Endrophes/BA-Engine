@@ -11,8 +11,6 @@ namespace BA_Engine
 	/// </summary>
 	class IComponent
 	{
-
-
 	public:
 
 		virtual ~IComponent() {}
@@ -28,19 +26,9 @@ namespace BA_Engine
 		virtual void update(CompData data) const = 0;
 
 		/// <summary>
-		/// 
-		/// </summary>
-		virtual void moveData(CompData source, CompData destination) const = 0;
-
-		/// <summary>
 		/// Close out and clear data when removing the component
 		/// </summary>
 		virtual void shutdown(CompData data) const = 0;
-
-		/// <summary>
-		/// Get the size of data for the given component
-		/// </summary>
-		virtual std::size_t getSize() const = 0;
 	};
 
 }
