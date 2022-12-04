@@ -231,6 +231,7 @@ namespace BA_Engine
             if (mEntityCompMap[pEntId].find(compId) != mEntityCompMap[pEntId].end())
             {
                 //Gives a warning, but I will take it.
+                //Warn: not all control paths return a value
                 return dynamic_cast<T*>(mEntityCompMap[pEntId][compId]);
             }
             else
