@@ -164,7 +164,7 @@ namespace BA_Engine
                 //_ASSERT(false);
             }
 
-            if (mEntityCompMap.find(pEntId) != mEntityCompMap.end())
+            if (mEntityCompMap.find(pEntId) == mEntityCompMap.end())
             {
                 log_d("Entity has not been register");
                 _ASSERT(false);
@@ -224,17 +224,19 @@ namespace BA_Engine
 
             if (mEntityCompMap.find(pEntId) == mEntityCompMap.end())
             {
-                log_d("Entity has not been register")
-                    return;
+                log_d("Entity has not been register");
+                _ASSERT(false);
             }
 
             if (mEntityCompMap[pEntId].find(compId) != mEntityCompMap[pEntId].end())
             {
-                return &mEntityCompMap[pEntId][compId];
+                //Gives a warning, but I will take it.
+                return dynamic_cast<T*>(mEntityCompMap[pEntId][compId]);
             }
             else
             {
-                return nullptr;
+                log_d("Component is not part of the entity");
+                _ASSERT(false);
             }
         }
 
