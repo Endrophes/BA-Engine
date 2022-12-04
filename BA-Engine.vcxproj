@@ -155,6 +155,7 @@
     <ClInclude Include="src\BaseClass\ISystem.h" />
     <ClInclude Include="src\BaseClass\Scene.h" />
     <ClInclude Include="src\Basedefines.h" />
+    <ClInclude Include="src\Components\Component.h" />
     <ClInclude Include="src\Components\Health.h" />
     <ClInclude Include="src\Components\Position.h" />
     <ClInclude Include="src\Components\ShipRegistry.h" />
