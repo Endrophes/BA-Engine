@@ -142,12 +142,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\BA-Engine.cpp" />
-    <ClCompile Include="src\BaseClass\Entity.cpp" />
     <ClCompile Include="src\BaseClass\Scene.cpp" />
     <ClCompile Include="src\PrecompiledHeader.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\BaseClass\Registry.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BaseClass\Entity.h" />
