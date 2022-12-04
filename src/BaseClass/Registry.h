@@ -105,9 +105,9 @@ namespace BA_Engine
 
             mComponentRegMap.emplace(
                 std::pair<
-                compName,
-                newCompId
+                const char*, ComponentId
                 >
+                (compName, newCompId)
             );
         }
 
@@ -155,11 +155,13 @@ namespace BA_Engine
         T* addComponent(const EntityId& pEntId, Args&&... args)
         {
             auto compName = typeid(T).name();
-
+            
+            //TODO: Figure out who should register the components
             if (!isComponentRegistered(compName))
             {
-                log_d("Component has not been register");
-                _ASSERT(false);
+                registerComponent<T>(); // If not then register it! - says 11 pm me
+                //log_d("Component has not been register");
+                //_ASSERT(false);
             }
 
             if (mEntityCompMap.find(pEntId) != mEntityCompMap.end())
