@@ -138,7 +138,7 @@ namespace BA_Engine
         /// Confirms that the component has a ID associated with it.
         /// Internal function that is used to reduce redundancy
         /// </summary>
-        bool isComponentRegistered(unsigned char* pCompName)
+        bool isComponentRegistered(const char* pCompName)
         {
             return (mComponentRegMap.find(pCompName) != mComponentRegMap.end());
         }
@@ -331,7 +331,7 @@ namespace BA_Engine
         /// <summary>
         /// A map that set's up the components ID and matches it to the components name
         /// </summary>
-        std::unordered_map< unsigned char *, ComponentId > mComponentRegMap;
+        std::unordered_map< const char *, ComponentId > mComponentRegMap;
 
         /// <summary>
         /// A map that ties the Entity Id to its components
