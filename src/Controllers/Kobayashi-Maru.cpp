@@ -24,6 +24,10 @@ namespace BA_Engine
 	void KobayashiMaruControler::setup()
 	{
 
+		setIsRunning(true);
+
+		//TODO: REMOVE MAGIC NUMBERS!
+
 		// Create the attackers
 		for (int i = 1; i <= kNumberOfAttackers; i++)
 		{
@@ -35,7 +39,8 @@ namespace BA_Engine
 				i
 			);
 			attacker.addComponent<Disruptor>(5.0f, 20.0f);
-			attacker.addComponent<ImpulseEngines>(10.0f, 0.0f, true);
+			attacker.addComponent<ImpulseEngines>(10.0f, 10.0f, true);
+			attacker.addComponent<Health>(75.0f);
 		}
 
 		//Create the player
@@ -48,9 +53,9 @@ namespace BA_Engine
 			1701
 		);
 		mPlayer.addComponent<Phaser>(10.0f, 10.0f, true);
-		mPlayer.addComponent<PhotonTorpedo>(5.0f, 15.0f, true);
-		mPlayer.addComponent<ImpulseEngines>(10.0f, 0.0f, true);
-
+		mPlayer.addComponent<PhotonTorpedo>(6.0f, 13.0f, true);
+		mPlayer.addComponent<ImpulseEngines>(10.0f, 5.0f, true);
+		mPlayer.addComponent<Health>(100.0f);
 
 		mEntSys = new EnterpriseSystem(mScene);
 		mRomSys = new RomulanSystem(mScene);
@@ -122,12 +127,27 @@ namespace BA_Engine
 			//Game Over
 			setIsRunning(false);
 		}
+
+		ConsoleUtils::clearConsole();
 	}
 
 	void KobayashiMaruControler::shutdown()
 	{
 		printMessage("");
-		printMessage("Program Terminated by user");
+
+		if (mPlayer.getComponent<Health>()->mHealth <= 0)
+		{
+			printMessage("Simulation Terminated. The Enterprise was destroyed with all hands");
+			printMessage("Take heart, their sacrifice help smooth over relations with the klingons.");
+			printMessage("They have gone down in klingon history as honorable warriors they be honored to join in battle along side.");
+			printMessage("Program Terminated");
+		}
+		else
+		{
+			printMessage("Program Terminated by user");
+		}
+
+		
 		printMessage("");
 	}
 }
