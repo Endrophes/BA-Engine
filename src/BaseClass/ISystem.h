@@ -19,7 +19,7 @@ namespace BA_Engine
         /// <summary>
         /// Perform operations for the given system
         /// </summary>
-        virtual void run(const float elapsedTime) = 0;
+        virtual void run(const float pElapsedTime) = 0;
 
     };
 
