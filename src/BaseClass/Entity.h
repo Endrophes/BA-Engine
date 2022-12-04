@@ -15,13 +15,13 @@ namespace BA_Engine
 	class Entity
 	{
 	public:
-		Entity(EntityId pEntId, Scene* pScene)
+		Entity(EntityId pEntId = kInvlaid_Entity, Scene* pScene = nullptr)
 			: mEntId(pEntId)
 			, mScene(pScene)
 		{
 
 		}
-
+		 
 		~Entity()
 		{
 
