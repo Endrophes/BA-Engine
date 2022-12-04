@@ -12,6 +12,8 @@ int main()
 
 	kmc.setup();
 
+	kmc.start();
+
 	while (run)
 	{
 		//TODO: calculate Elapsed time
