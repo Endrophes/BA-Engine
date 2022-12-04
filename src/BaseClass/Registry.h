@@ -69,7 +69,7 @@ namespace BA_Engine
             //Remove Entity from lists of each Component
             for (auto& comp : mCompMap)
             {
-                auto entityVec = mComponentStorageMap[comp.first];
+                auto& entityVec = mComponentStorageMap[comp.first];
                 entityVec.erase(
                     std::remove(entityVec.begin(), entityVec.end(), pEntId),
                     entityVec.end()
@@ -323,7 +323,7 @@ namespace BA_Engine
         /// </summary>
         void runSystems(const SystemLayer& pLayer, const float pElapsedTime)
         {
-            if (mSystemRegMap.find(pLayer) != mSystemRegMap.end())
+            if (mSystemRegMap.find(pLayer) == mSystemRegMap.end())
             {
                 log_d("Layer has not been set");
                 return;
