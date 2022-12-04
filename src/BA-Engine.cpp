@@ -22,5 +22,7 @@ int main()
 		run = kmc.getIsRunning();
 	}
 
+	kmc.shutdown();
+
 	return 0;
 }
