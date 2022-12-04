@@ -36,6 +36,15 @@ namespace BA_Engine
         /// Clear the game board
         /// </summary>
         virtual void shutdown() = 0;
+
+        /// <summary>
+        /// Confirms that the game is still running
+        /// </summary>
+        bool getIsRunning()
+        {
+            return isRunning;
+        }
+
     };
 
 }
