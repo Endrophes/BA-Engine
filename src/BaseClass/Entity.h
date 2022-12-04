@@ -54,6 +54,15 @@ namespace BA_Engine
 		}
 
 		/// <summary>
+		/// Finds and retrieves the component attached to this entity
+		/// </summary>
+		template<class T>
+		T* getComponent()
+		{
+			return mScene->mRegistor.getComponent<T>(mEntId);
+		}
+
+		/// <summary>
 		/// Removes a component from the entity
 		/// </summary>
 		template<class T>
