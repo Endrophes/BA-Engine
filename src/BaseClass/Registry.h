@@ -6,6 +6,8 @@
 #include "../BaseClass/IComponent.h"
 #include "../BaseClass/ISystem.h"
 
+#include <type_traits>
+
 namespace BA_Engine
 {
 
@@ -39,11 +41,11 @@ namespace BA_Engine
 
             //TODO: Check if ID has been used
 
-            std::unordered_map< ComponentId, IComponent > newMap;
+            std::unordered_map< ComponentId, IComponent* > newMap;
             mEntityCompMap.emplace(
                 std::pair<
                 EntityId,
-                std::unordered_map< ComponentId, IComponent >
+                std::unordered_map< ComponentId, IComponent* >
                 >(entId, newMap)
             );
 
@@ -62,7 +64,7 @@ namespace BA_Engine
                 return;
             }
 
-            std::unordered_map< ComponentId, IComponent > mCompMap = mEntityCompMap[pEntId];
+            std::unordered_map< ComponentId, IComponent* > mCompMap = mEntityCompMap[pEntId];
 
             //Remove Entity from lists of each Component
             for (auto& comp : mCompMap)
@@ -143,6 +145,8 @@ namespace BA_Engine
             return (mComponentRegMap.find(pCompName) != mComponentRegMap.end());
         }
 
+
+        //TODO: I need to return a reference and not a pointer
         /// <summary>
         /// Creates a new instance of the given component and pass in
         /// the arguments
@@ -155,27 +159,27 @@ namespace BA_Engine
             if (!isComponentRegistered(compName))
             {
                 log_d("Component has not been register");
-                return;
+                _ASSERT(false);
             }
 
             if (mEntityCompMap.find(pEntId) != mEntityCompMap.end())
             {
                 log_d("Entity has not been register");
-                return;
+                _ASSERT(false);
             }
 
             if (hasComponent<T>(pEntId))
             {
                 log_d("Entity already has the component");
-                return;
+                _ASSERT(false);
             }
 
             ComponentId& compId = mComponentRegMap[compName];
 
-            T* newComp = new T(args);
+            auto newComp = new T((args)...);
 
             //Add the new component
-            mEntityCompMap[pEntId][compId] = newComp;
+            mEntityCompMap[pEntId][compId] = dynamic_cast<IComponent *>(newComp);
 
             //Record who is now using the component
             mComponentStorageMap[compId].push_back(pEntId);
@@ -338,7 +342,7 @@ namespace BA_Engine
         /// </summary>
         std::unordered_map<
             EntityId,
-            std::unordered_map< ComponentId, IComponent >
+            std::unordered_map< ComponentId, IComponent* >
         > mEntityCompMap;
 
         /// <summary>

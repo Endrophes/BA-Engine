@@ -10,7 +10,7 @@ namespace BA_Engine
     /// <summary>
     /// 2D coordinates on a map. 
     /// </summary>
-    class Position : public IComponent
+    class Position : public virtual IComponent
     {
     public:
 
