@@ -66,6 +66,27 @@ namespace BA_Engine
                 Disruptor*      mydisr = romulanShip.getComponent<Disruptor>();
                 Position*       myPos  = romulanShip.getComponent<Position>();
                 ImpulseEngines* myEng  = romulanShip.getComponent<ImpulseEngines>();
+                Health*         myHel  = romulanShip.getComponent<Health>();
+
+                if (myHel->mHitBy.size() > 0)
+                {
+
+                    for (auto pairHit : myHel->mHitBy)
+                    {
+                        myHel->mHealth -= pairHit.second;
+                        myHel->mHealth = (myHel->mHealth < 0) ? 0 : myHel->mHealth;
+                    }
+
+                    myHel->mHitBy.clear();
+
+                    if (myHel->mHealth <= 0)
+                    {
+                        //HE'S Dead Jim!!
+                        mGameScene.removeEntity(romulanShip);
+                        continue;
+                    }
+
+                }
 
                 float distance = MathUtils::getDistance(
                     entPos->mX, entPos->mY,
