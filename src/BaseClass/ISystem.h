@@ -14,8 +14,6 @@ namespace BA_Engine
     
     public:
 
-        virtual ~ISystem() {}
-
         /// <summary>
         /// Perform operations for the given system
         /// </summary>
