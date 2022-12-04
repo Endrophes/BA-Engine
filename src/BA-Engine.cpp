@@ -1,4 +1,5 @@
 #include "PrecompiledHeader.h"
+#include "Controllers/Kobayashi-Maru.h"
 
 /// <summary>
 /// The start of engine
@@ -7,28 +8,21 @@
 int main()
 {
 	bool run = true;
+	BA_Engine::KobayashiMaruControler kmc;
 
-	std::cout << "Type \"exit\" to end the program" << std::endl;
+	kmc.setup();
+
+	kmc.start();
 
 	while (run)
 	{
-		std::string userinput;
-		std::cin >> userinput;
-
-		if (userinput == "Exit" || userinput == "exit")
-		{
-			std::cout << "Program terminated by user." << std::endl;
-			run = false;
-		}
-		else if (userinput == "Help")
-		{
-			//List out commands
-		}
-		else
-		{
-			std::cout << "unknown command" << std::endl;
-		}
+		//TODO: calculate Elapsed time
+		float elapsedTime = 0.0f;
+		kmc.update(elapsedTime);
+		run = kmc.getIsRunning();
 	}
+
+	kmc.shutdown();
 
 	return 0;
 }

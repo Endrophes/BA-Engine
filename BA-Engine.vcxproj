@@ -90,6 +90,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,23 +143,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\BA-Engine.cpp" />
-    <ClCompile Include="src\BaseClass\Entity.cpp" />
     <ClCompile Include="src\BaseClass\Scene.cpp" />
+    <ClCompile Include="src\Controllers\Kobayashi-Maru.cpp" />
     <ClCompile Include="src\PrecompiledHeader.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\BaseClass\Registry.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BaseClass\Entity.h" />
     <ClInclude Include="src\BaseClass\IComponent.h" />
     <ClInclude Include="src\BaseClass\ISystem.h" />
     <ClInclude Include="src\BaseClass\Scene.h" />
+    <ClInclude Include="src\BaseClass\WeaponDefines.h" />
     <ClInclude Include="src\Basedefines.h" />
+    <ClInclude Include="src\Components\Component.h" />
+    <ClInclude Include="src\Components\Position.h" />
+    <ClInclude Include="src\Components\ShipRegistry.h" />
+    <ClInclude Include="src\Components\Tag.h" />
+    <ClInclude Include="src\BaseClass\GameController.h" />
+    <ClInclude Include="src\Controllers\Kobayashi-Maru.h" />
     <ClInclude Include="src\PrecompiledHeader.h" />
+    <ClInclude Include="src\Systems\EnterpriseSystem.h" />
     <ClInclude Include="src\Systems\EntitySystem.h" />
     <ClInclude Include="src\BaseClass\Registry.h" />
+    <ClInclude Include="src\Systems\RomulanSystem.h" />
+    <ClInclude Include="src\Utilities\ConsoleUtils.h" />
     <ClInclude Include="src\Utilities\Logger.h" />
+    <ClInclude Include="src\Utilities\MathUtils.h" />
     <ClInclude Include="src\Utilities\RandomGenerator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

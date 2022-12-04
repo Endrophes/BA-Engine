@@ -15,31 +15,61 @@ namespace BA_Engine
 	class Entity
 	{
 	public:
-		Entity(EntityId pEntId, Scene* pScene);
-		~Entity();
+		Entity(EntityId pEntId = kInvlaid_Entity, Scene* pScene = nullptr)
+			: mEntId(pEntId)
+			, mScene(pScene)
+		{
+
+		}
+		 
+		~Entity()
+		{
+
+		}
 	
 		/// <summary>
 		/// Return the Entities ID number
 		/// </summary>
-		EntityId getId();
+		EntityId getId()
+		{
+			return mEntId;
+		}
 
 		/// <summary>
 		/// Added a component to the entity via the scene
 		/// </summary>
 		template<class T, typename... Args>
-		void addComponent(Args&&... args);
+		T* addComponent(Args&&... args)
+		{
+			return mScene->mRegistor.addComponent<T>(mEntId, std::forward<Args>(args)...);
+		}
 
 		/// <summary>
 		/// Checks to see if the component has been added to the entity
 		/// </summary>
 		template<class T>
-		bool hasComponent();
+		bool hasComponent()
+		{
+			return mScene->mRegistor.hasComponent<T>(mEntId);
+		}
+
+		/// <summary>
+		/// Finds and retrieves the component attached to this entity
+		/// </summary>
+		template<class T>
+		T* getComponent()
+		{
+			return mScene->mRegistor.getComponent<T>(mEntId);
+		}
 
 		/// <summary>
 		/// Removes a component from the entity
 		/// </summary>
 		template<class T>
-		void removeComponent();
+		void removeComponent()
+		{
+			mScene->mRegistor.removeComponent<T>(mEntId);
+		}
 
 	private:
 

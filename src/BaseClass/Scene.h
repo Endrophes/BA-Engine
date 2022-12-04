@@ -42,6 +42,23 @@ namespace BA_Engine
 		/// </summary>
 		void removeEntity(Entity pEnt);
 
+		
+		/// <summary>
+		/// Get a vector of entities that have this component
+		/// </summary>
+		template<class T>
+		std::vector<Entity> getEntitiesWith()
+		{
+			std::vector<EntityId> entityIds = mRegistor.getEntitiesWith<T>();
+			std::vector<Entity> entites;
+			for (EntityId entId : entityIds)
+			{
+				entites.push_back(Entity(entId, this));
+			}
+
+			return entites;
+ 		}
+
 		/// <summary>
 		/// 
 		/// </summary>
