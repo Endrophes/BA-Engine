@@ -2,6 +2,7 @@
 #define CONSOLE_UTILS_H
 
 #include "../PrecompiledHeader.h"
+#include <stdlib.h>
 
 #define printMessage(pMsg)\
 {\
@@ -21,13 +22,14 @@ namespace BA_Engine
 		/// </summary>
 		static int printAndGetOption(std::string mainMsg, std::vector<std::string> options)
 		{
+			printMessage("");
 			printMessage(mainMsg);
 
-			int opNum = 1;
+			int opNum = 0;
 			for (std::string option : options)
 			{
+				++opNum;
 				printMessage((std::to_string(opNum) + ". " + option).c_str());
-				opNum++;
 			}
 
 			int optionPicked = 0;
@@ -39,7 +41,7 @@ namespace BA_Engine
 				return printAndGetOption(mainMsg, options); //Recursion for the win?
 			}
 
-			return optionPicked;
+			return (optionPicked);
 		}
 
 		/// <summary>
@@ -48,13 +50,14 @@ namespace BA_Engine
 		/// </summary>
 		static int printAndGetOption(std::string mainMsg, std::vector<std::pair<std::string, int>> options)
 		{
+			printMessage("");
 			printMessage(mainMsg);
 
-			int opNum = 1;
+			int opNum = 0;
 			for (std::pair<std::string, int> option : options)
 			{
+				++opNum;
 				printMessage((std::to_string(opNum) + ". " + option.first).c_str());
-				opNum++;
 			}
 
 			int optionPicked = 0;
@@ -66,7 +69,15 @@ namespace BA_Engine
 				return printAndGetOption(mainMsg, options); //Recursion for the win?
 			}
 
-			return options[optionPicked].second;
+			return options[(optionPicked-1)].second;
+		}
+
+		/// <summary>
+		/// Clears the console screen
+		/// </summary>
+		static void clearConsole()
+		{
+			std::system("CLS");
 		}
 	};
 
