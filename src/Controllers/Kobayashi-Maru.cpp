@@ -103,7 +103,7 @@ namespace BA_Engine
 
 		case 3:
 
-			shutdown();
+			setIsRunning(false);
 
 			break;
 
@@ -116,6 +116,12 @@ namespace BA_Engine
 	{
 		mScene.onUpdate(1, pElapsedTime); // Run player logic
 		mScene.onUpdate(2, pElapsedTime); // Run Romulan logic
+
+		if (mPlayer.getComponent<Health>()->mHealth <= 0)
+		{
+			//Game Over
+			setIsRunning(false);
+		}
 	}
 
 	void KobayashiMaruControler::shutdown()
