@@ -35,12 +35,12 @@ namespace BA_Engine
 	/// <summary>
 	// A Entity will never have an id of zero
 	/// </summary>
-	#define kInvlaid_Entity 0;
+	#define kInvlaid_Entity 0
 	
 	/// <summary>
 	// 
 	/// </summary>
-	#define kInvlaid_Component 0;
+	#define kInvlaid_Component 0
 }
 
 #endif //BASE_DEFINES_H
