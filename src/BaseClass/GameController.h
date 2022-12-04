@@ -13,7 +13,7 @@ namespace BA_Engine
     {
     private:
 
-        bool isRunning;
+        bool mIsRunning;
 
     public:
 
@@ -42,7 +42,15 @@ namespace BA_Engine
         /// </summary>
         bool getIsRunning()
         {
-            return isRunning;
+            return mIsRunning;
+        }
+
+        /// <summary>
+        /// Change the is running game state
+        /// </summary>
+        void setIsRunning(bool pIsRunning = false)
+        {
+            mIsRunning = pIsRunning;
         }
 
     };
