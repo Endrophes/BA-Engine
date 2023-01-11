@@ -131,7 +131,7 @@ namespace BA_Engine
 		mScene.onUpdate(1, pElapsedTime); // Run player logic
 		mScene.onUpdate(2, pElapsedTime); // Run Romulan logic
 
-		if (mPlayer.getComponent<Health>()->mHealth <= 0)
+		if (mPlayer.getComponent<Health>().mHealth <= 0)
 		{
 			//Game Over
 			setIsRunning(false);
@@ -144,7 +144,7 @@ namespace BA_Engine
 	{
 		printMessage("");
 
-		if (mPlayer.getComponent<Health>()->mHealth <= 0)
+		if (mPlayer.getComponent<Health>().mHealth <= 0)
 		{
 			printMessage("Simulation Terminated. The Enterprise was destroyed with all hands");
 			printMessage("Take heart, their sacrifice help smooth over relations with the klingons.");

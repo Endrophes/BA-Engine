@@ -42,17 +42,25 @@ namespace BA_Engine
 
         struct Target
         {
-            ShipRegistry* mReg;
-            Position*     mPos;
-            Health*       mHel;
+            ShipRegistry& mReg;
+            Position&     mPos;
+            Health&       mHel;
+
+            Target(ShipRegistry& pReg, Position& pPos, Health& pHel)
+                : mReg(pReg)
+                , mPos(pPos)
+                , mHel(pHel)
+            {
+
+            }
 
             float mDistance = 0.0f;
 
             std::string getStatus()
             {
                 return
-                    mReg->mName
-                    + " - Hull: " + std::to_string(mHel->mHealth)
+                    mReg.mName
+                    + " - Hull: " + std::to_string(mHel.mHealth)
                     + " - Dist: " + std::to_string(mDistance)
                 ;
             }
@@ -71,17 +79,19 @@ namespace BA_Engine
 
             for (Entity ship : ships)
             {
-                ShipRegistry* shipReg = ship.getComponent<ShipRegistry>();
-                if (shipReg->mRace == "Federation")
+                ShipRegistry& shipReg = ship.getComponent<ShipRegistry>();
+                if (shipReg.mRace == "Federation")
                 {
                     enterprise = ship;
                 }
                 else
                 {
-                    Target romTarg;
-                    romTarg.mReg = ship.getComponent<ShipRegistry>();
-                    romTarg.mPos = ship.getComponent<Position>();
-                    romTarg.mHel = ship.getComponent<Health>();
+                    Target romTarg = 
+                        Target (
+                            ship.getComponent<ShipRegistry>(),
+                            ship.getComponent<Position>(),
+                            ship.getComponent<Health>()
+                        );
 
                     romulans.push_back(romTarg);
                 }
@@ -95,29 +105,29 @@ namespace BA_Engine
 
             // Display player hit if any
 
-            Health* entHeal = enterprise.getComponent<Health>();
+            Health& entHeal = enterprise.getComponent<Health>();
 
-            if (entHeal->mHitBy.size() > 0)
+            if (entHeal.mHitBy.size() > 0)
             {
                 printMessage("Were hit!");
                 printMessage("");
 
-                for (auto pairHit : entHeal->mHitBy)
+                for (auto pairHit : entHeal.mHitBy)
                 {
                     printMessage(
                         ("Disruptor damage from " + pairHit.first + " for " + 
                             std::to_string(pairHit.second)).c_str()
                     );
 
-                    entHeal->mHealth -= pairHit.second;
-                    entHeal->mHealth = (entHeal->mHealth < 0) ? 0 : entHeal->mHealth;
+                    entHeal.mHealth -= pairHit.second;
+                    entHeal.mHealth = (entHeal.mHealth < 0) ? 0 : entHeal.mHealth;
                 }
 
-                entHeal->mHitBy.clear();
+                entHeal.mHitBy.clear();
 
-                if (entHeal->mHealth > 0)
+                if (entHeal.mHealth > 0)
                 {
-                    printMessage("Ships hull integrity down to " + std::to_string(entHeal->mHealth) + " percent!")
+                    printMessage("Ships hull integrity down to " + std::to_string(entHeal.mHealth) + " percent!")
                 }
                 else
                 {
@@ -128,7 +138,7 @@ namespace BA_Engine
 
             //Player picks target
             
-            Position* entPos = enterprise.getComponent<Position>();
+            Position& entPos = enterprise.getComponent<Position>();
 
             std::vector<std::pair<std::string, int>> options;
 
@@ -137,8 +147,8 @@ namespace BA_Engine
             for (Target& romulan : romulans)
             {
                 romulan.mDistance = MathUtils::getDistance(
-                    entPos->mX, entPos->mY,
-                    romulan.mPos->mX, romulan.mPos->mY
+                    entPos.mX, entPos.mY,
+                    romulan.mPos.mX, romulan.mPos.mY
                 );
 
                 options.push_back(
@@ -152,8 +162,8 @@ namespace BA_Engine
 
             options.clear();
 
-            Phaser* phasers         = enterprise.getComponent<Phaser>();
-            PhotonTorpedo* torpedos = enterprise.getComponent<PhotonTorpedo>();
+            Phaser& phasers         = enterprise.getComponent<Phaser>();
+            PhotonTorpedo& torpedos = enterprise.getComponent<PhotonTorpedo>();
 
             if (primeTarget.mDistance >= 5)// TODO: Magic numbers!! EEEEEKKKKK
             {
@@ -162,25 +172,25 @@ namespace BA_Engine
 
             //Allow option to fire when in range
 
-            if (primeTarget.mDistance < phasers->mMaxRange)
+            if (primeTarget.mDistance < phasers.mMaxRange)
             {
                 options.push_back(std::pair < std::string, int >("Fire phasers!", 1));
             }
             
-            if (primeTarget.mDistance < torpedos->mMaxRange)
+            if (primeTarget.mDistance < torpedos.mMaxRange)
             {
                 options.push_back(std::pair < std::string, int >("Fire photon torpedo!", 2));
             }
 
-            if (primeTarget.mDistance < phasers->mMaxRange && primeTarget.mDistance < torpedos->mMaxRange)
+            if (primeTarget.mDistance < phasers.mMaxRange && primeTarget.mDistance < torpedos.mMaxRange)
             {
                 options.push_back(std::pair < std::string, int >("Fire all weapons!", 3));
             }
 
             int actionNum = ConsoleUtils::printAndGetOption("Action sir?", options);
 
-            ShipRegistry* entReg  = enterprise.getComponent<ShipRegistry>();
-            ImpulseEngines* myEng = enterprise.getComponent<ImpulseEngines>();
+            ShipRegistry& entReg  = enterprise.getComponent<ShipRegistry>();
+            ImpulseEngines& myEng = enterprise.getComponent<ImpulseEngines>();
 
             switch (actionNum)
             {
@@ -189,27 +199,27 @@ namespace BA_Engine
 
                 //Lerp To get closer, I want to hit them with my sword!
 
-                entPos->mX = MathUtils::lerp(entPos->mX, primeTarget.mPos->mX, (myEng->mSpeed * 0.1f));
-                entPos->mY = MathUtils::lerp(entPos->mY, primeTarget.mPos->mY, (myEng->mSpeed * 0.1f));
+                entPos.mX = MathUtils::lerp(entPos.mX, primeTarget.mPos.mX, (myEng.mSpeed * 0.1f));
+                entPos.mY = MathUtils::lerp(entPos.mY, primeTarget.mPos.mY, (myEng.mSpeed * 0.1f));
 
                 break;
 
             case 1:
 
-                primeTarget.mHel->mHitBy.push_back(std::pair<std::string, float>(entReg->mName, phasers->mDamage));
+                primeTarget.mHel.mHitBy.push_back(std::pair<std::string, float>(entReg.mName, phasers.mDamage));
 
                 break;
 
             case 2:
 
-                primeTarget.mHel->mHitBy.push_back(std::pair<std::string, float>(entReg->mName, torpedos->mDamage));
+                primeTarget.mHel.mHitBy.push_back(std::pair<std::string, float>(entReg.mName, torpedos.mDamage));
 
                 break;
 
             case 3:
 
-                primeTarget.mHel->mHitBy.push_back(std::pair<std::string, float>(entReg->mName, phasers->mDamage));
-                primeTarget.mHel->mHitBy.push_back(std::pair<std::string, float>(entReg->mName, torpedos->mDamage));
+                primeTarget.mHel.mHitBy.push_back(std::pair<std::string, float>(entReg.mName, phasers.mDamage));
+                primeTarget.mHel.mHitBy.push_back(std::pair<std::string, float>(entReg.mName, torpedos.mDamage));
 
                 break;
 

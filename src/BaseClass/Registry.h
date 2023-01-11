@@ -50,11 +50,11 @@ namespace BA_Engine
 
             //TODO: Check if ID has been used
 
-            std::unordered_map< ComponentId, IComponent* > newMap;
+            std::unordered_map< ComponentId, IComponent > newMap;
             mEntityCompMap.emplace(
                 std::pair<
                 EntityId,
-                std::unordered_map< ComponentId, IComponent* >
+                std::unordered_map< ComponentId, IComponent >
                 >(entId, newMap)
             );
 
@@ -73,7 +73,7 @@ namespace BA_Engine
                 return;
             }
 
-            std::unordered_map< ComponentId, IComponent* > mCompMap = mEntityCompMap[pEntId];
+            std::unordered_map< ComponentId, IComponent > mCompMap = mEntityCompMap[pEntId];
 
             //Remove Entity from lists of each Component
             for (auto& comp : mCompMap)
@@ -161,7 +161,7 @@ namespace BA_Engine
         /// the arguments
         /// </summary>
         template<class T, typename... Args>
-        T* addComponent(const EntityId& pEntId, Args&&... args)
+        T& addComponent(const EntityId& pEntId, Args&&... args)
         {
             auto compName = typeid(T).name();
             
@@ -187,10 +187,11 @@ namespace BA_Engine
 
             ComponentId& compId = mComponentRegMap[compName];
 
-            auto newComp = new T((args)...);
+            /// TODO: This is where hell can be paid.
+            auto newComp = T((args)...);
 
             //Add the new component
-            mEntityCompMap[pEntId][compId] = dynamic_cast<IComponent *>(newComp);
+            mEntityCompMap[pEntId][compId] = (newComp);
 
             //Record who is now using the component
             mComponentStorageMap[compId].push_back(pEntId);
@@ -227,7 +228,7 @@ namespace BA_Engine
         /// Gets an instance of a component that is attached to the Entity
         /// </summary>
         template<class T>
-        T* getComponent(const EntityId& pEntId)
+        T& getComponent(const EntityId& pEntId)
         {
             ComponentId compId = getComponentId<T>();
 
@@ -241,7 +242,7 @@ namespace BA_Engine
             {
                 //Gives a warning, but I will take it.
                 //Warn: not all control paths return a value
-                return dynamic_cast<T*>(mEntityCompMap[pEntId][compId]);
+                return static_cast<T&>(mEntityCompMap[pEntId][compId]);
             }
             else
             {
@@ -288,7 +289,7 @@ namespace BA_Engine
         /// Gets a vector of entities that have a specific component
         /// </summary>
         template<class T>
-        std::vector<EntityId> getEntitiesWith()
+        const std::vector<EntityId>& getEntitiesWith()
         {
             if (!isComponentRegistered<T>())
             {
@@ -356,7 +357,7 @@ namespace BA_Engine
         /// </summary>
         std::unordered_map<
             EntityId,
-            std::unordered_map< ComponentId, IComponent* >
+            std::unordered_map< ComponentId, IComponent >
         > mEntityCompMap;
 
         /// <summary>

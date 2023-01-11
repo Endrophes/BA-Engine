@@ -56,8 +56,8 @@ namespace BA_Engine
 
             for (Entity ship : ships)
             {
-                ShipRegistry* shipReg = ship.getComponent<ShipRegistry>();
-                if (shipReg->mRace == "Federation")
+                ShipRegistry& shipReg = ship.getComponent<ShipRegistry>();
+                if (shipReg.mRace == "Federation")
                 {
                     enterprise = ship;
                 }
@@ -67,28 +67,28 @@ namespace BA_Engine
                 }
             }
 
-            Position* entPos = enterprise.getComponent<Position>();
+            Position& entPos = enterprise.getComponent<Position>();
 
             for (Entity romulanShip : romulans)
             {
-                ShipRegistry*   myReg  = romulanShip.getComponent<ShipRegistry>();
-                Disruptor*      mydisr = romulanShip.getComponent<Disruptor>();
-                Position*       myPos  = romulanShip.getComponent<Position>();
-                ImpulseEngines* myEng  = romulanShip.getComponent<ImpulseEngines>();
-                Health*         myHel  = romulanShip.getComponent<Health>();
+                ShipRegistry&   myReg  = romulanShip.getComponent<ShipRegistry>();
+                Disruptor&      mydisr = romulanShip.getComponent<Disruptor>();
+                Position&       myPos  = romulanShip.getComponent<Position>();
+                ImpulseEngines& myEng  = romulanShip.getComponent<ImpulseEngines>();
+                Health&         myHel  = romulanShip.getComponent<Health>();
 
-                if (myHel->mHitBy.size() > 0)
+                if (myHel.mHitBy.size() > 0)
                 {
 
-                    for (auto pairHit : myHel->mHitBy)
+                    for (auto pairHit : myHel.mHitBy)
                     {
-                        myHel->mHealth -= pairHit.second;
-                        myHel->mHealth = (myHel->mHealth < 0) ? 0 : myHel->mHealth;
+                        myHel.mHealth -= pairHit.second;
+                        myHel.mHealth = (myHel.mHealth < 0) ? 0 : myHel.mHealth;
                     }
 
-                    myHel->mHitBy.clear();
+                    myHel.mHitBy.clear();
 
-                    if (myHel->mHealth <= 0)
+                    if (myHel.mHealth <= 0)
                     {
                         //HE'S Dead Jim!!
                         mGameScene.removeEntity(romulanShip);
@@ -98,26 +98,26 @@ namespace BA_Engine
                 }
 
                 float distance = MathUtils::getDistance(
-                    entPos->mX, entPos->mY,
-                    myPos->mX,  myPos->mY
+                    entPos.mX, entPos.mY,
+                    myPos.mX,  myPos.mY
                 );
 
-                if (distance < mydisr->mMaxRange)
+                if (distance < mydisr.mMaxRange)
                 {
                     //Fire when in range
 
-                    Health* entHealth = enterprise.getComponent<Health>();
-                    entHealth->mHitBy.push_back(std::pair<std::string, float>(
-                        myReg->mName, mydisr->mDamage
+                    Health& entHealth = enterprise.getComponent<Health>();
+                    entHealth.mHitBy.push_back(std::pair<std::string, float>(
+                        myReg.mName, mydisr.mDamage
                     ));
                 }
                 else
                 {
                     //Lerp Closer to the Enterprise
-                    myPos->mX = 
-                        MathUtils::lerp(myPos->mX, entPos->mX, (myEng->mSpeed * 0.01f));
-                    myPos->mY = 
-                        MathUtils::lerp(myPos->mY, entPos->mY, (myEng->mSpeed * 0.01f));
+                    myPos.mX = 
+                        MathUtils::lerp(myPos.mX, entPos.mX, (myEng.mSpeed * 0.01f));
+                    myPos.mY = 
+                        MathUtils::lerp(myPos.mY, entPos.mY, (myEng.mSpeed * 0.01f));
                 }
 
             }

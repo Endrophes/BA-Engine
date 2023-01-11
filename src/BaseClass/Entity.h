@@ -48,7 +48,7 @@ namespace BA_Engine
 		/// Added a component to the entity via the scene
 		/// </summary>
 		template<class T, typename... Args>
-		T* addComponent(Args&&... args)
+		T& addComponent(Args&&... args)
 		{
 			return mScene->mRegistor.addComponent<T>(mEntId, std::forward<Args>(args)...);
 		}
@@ -66,7 +66,7 @@ namespace BA_Engine
 		/// Finds and retrieves the component attached to this entity
 		/// </summary>
 		template<class T>
-		T* getComponent()
+		T& getComponent()
 		{
 			return mScene->mRegistor.getComponent<T>(mEntId);
 		}
