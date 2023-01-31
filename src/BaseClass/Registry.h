@@ -27,6 +27,8 @@ namespace BA_Engine
     /// </summary>
     class Registry
     {
+        typedef std::unordered_map < ComponentId, IComponent > unordered_Comp_map;
+
         /*
             Things to keep in mind:
                 - An Entity is just uint64_t (Used like a key in a map)
@@ -50,11 +52,11 @@ namespace BA_Engine
 
             //TODO: Check if ID has been used
 
-            std::unordered_map< ComponentId, IComponent > newMap;
+            unordered_Comp_map newMap;
             mEntityCompMap.emplace(
                 std::pair<
                 EntityId,
-                std::unordered_map< ComponentId, IComponent >
+                unordered_Comp_map
                 >(entId, newMap)
             );
 
@@ -73,7 +75,7 @@ namespace BA_Engine
                 return;
             }
 
-            std::unordered_map< ComponentId, IComponent > mCompMap = mEntityCompMap[pEntId];
+            unordered_Comp_map mCompMap = mEntityCompMap[pEntId];
 
             //Remove Entity from lists of each Component
             for (auto& comp : mCompMap)
@@ -242,7 +244,7 @@ namespace BA_Engine
             {
                 //Gives a warning, but I will take it.
                 //Warn: not all control paths return a value
-                return static_cast<T&>(mEntityCompMap[pEntId][compId]);
+                return (T&)(mEntityCompMap[pEntId][compId]);
             }
             else
             {
@@ -357,7 +359,7 @@ namespace BA_Engine
         /// </summary>
         std::unordered_map<
             EntityId,
-            std::unordered_map< ComponentId, IComponent >
+            unordered_Comp_map
         > mEntityCompMap;
 
         /// <summary>
